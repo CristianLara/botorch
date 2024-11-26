@@ -1,0 +1,32 @@
+/**
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/* @import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono'); */
+
+:root {
+  /* --ifm-color-primary-lightest: #283442;
+  --ifm-color-primary-lighter: #242E3B;
+  --ifm-color-primary-light: #222C38; */
+  --ifm-color-primary: #f15a24;
+  /* --ifm-color-primary-dark: #1C242E;
+  --ifm-color-primary-darker: #1A222B;
+  --ifm-color-primary-darkest: #161C24; */
+}
+
+.homeContainer .button.button--secondary.button--outline:not(.button--active):not(:hover) {
+  color: var(--ifm-color-secondary);
+}
+
+.homeContainer {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(180deg,
+      rgba(2, 0, 36, 1),
+      rgba(34, 34, 34, 1) 0%,
+      rgba(28, 96, 247, 1) 100%);
+  padding: 30px 0px;
+}
