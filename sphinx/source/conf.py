@@ -14,6 +14,7 @@
 import os
 import sys
 
+from packaging.version import Version
 from pkg_resources import get_distribution
 
 
@@ -96,6 +97,7 @@ html_theme_options = {}
 html_static_path = ["_static"]
 
 html_css_files = ['custom.css']
+html_js_files = ['insert_versions.js']
 
 # Custom sidebar templates, must be a dictionary that maps document names
 # to template names.
@@ -200,3 +202,17 @@ epub_exclude_files = ["search.html"]
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
 todo_include_todos = True
+
+# -- Setup Version Picker -------------------------------------------
+
+html_context = dict()
+
+# Get list of versions from existing sphinx builds
+versions_dir = "../../website/static/api/versions"
+numbered_versions = [
+    name for name in os.listdir(versions_dir)
+    if os.path.isdir(os.path.join(versions_dir, name)) and name not in ["latest", "stable"]
+]
+    
+html_context['current_version'] = "latest" # Overridden by the `make version VERSION=...` command
+html_context['versions'] = ["latest"] + sorted(numbered_versions, key=Version, reverse=True)

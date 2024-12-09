@@ -43,6 +43,13 @@ if [[ $ONLY_DOCUSAURUS == false ]]; then
   echo "Generating tutorials"
   echo "-----------------------------------"
   python3 scripts/convert_ipynb_to_mdx.py --clean
+
+  echo "-----------------------------------"
+  echo "Generating sphinx"
+  echo "-----------------------------------"
+  cd sphinx
+  make latest
+  cd ..
 fi
 
 echo "-----------------------------------"

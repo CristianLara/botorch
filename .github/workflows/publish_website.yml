@@ -35,7 +35,11 @@ jobs:
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
         python3 scripts/convert_ipynb_to_mdx.py --clean
-        cd website
+
+        cd sphinx
+        make version VERSION=${{ inputs.new_version }}
+        cd ../website
+
         yarn
         yarn docusaurus docs:version ${{ inputs.new_version }}
 
