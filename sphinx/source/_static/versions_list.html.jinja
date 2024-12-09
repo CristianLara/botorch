@@ -1,0 +1,7 @@
+{% if versions|length >= 1 %}
+<dl>
+    {% for version in versions %}
+    <dd><a href="/botorch/api/versions/{{version}}/">{{ version }}</a></dd>
+    {% endfor %}
+</dl>
+{% endif %}
