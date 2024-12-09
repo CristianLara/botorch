@@ -81,7 +81,7 @@ module.exports={
           "position": "left"
         },
         {
-          "href": "https://botorch-dev.readthedocs.io/",
+          "to": "/api/versions/stable/",
           "label": "API Reference",
           "position": "left",
           "target": "_blank",
