@@ -47,7 +47,21 @@ jobs:
   version-and-publish-website:
     # needs: package-deploy-pypi
     name: Version and Publish website
-    uses: ./.github/workflows/publish_website.yml
-    with:
-      new_version: ${{ github.event.release.tag_name }}
-    secrets: inherit
+    steps:
+    - uses: actions/checkout@v4
+    - name: Check if major or minor version changed
+      id: compare
+      run: |
+        previous=$(git describe --tags --abbrev=0 ${{ github.event.release.tag_name }}^)
+        previous=$(cut -d '.' -f 1-2 <<< $previous) # remove patch number
+        previous=${previous#v}                      # remove optional "v" prefix
+        next="${$(cut -d '.' -f 1-2 <<< ${{ github.event.release.tag_name }})#v}"
+
+        major_minor_changed=$( [[ "$previous" == "$next" ]] && echo "false" || echo "true" )
+        echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
+    - name: Version and Publish website
+      if: ${{ steps.compare.outputs.major_minor_changed }}
+      uses: ./.github/workflows/publish_website.yml
+      with:
+        new_version: ${{ github.event.release.tag_name }}
+      secrets: inherit
