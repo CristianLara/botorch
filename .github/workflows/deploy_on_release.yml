@@ -70,4 +70,4 @@ jobs:
       #   new_version: ${{ inputs.release_tag }}
       run: |
         echo "example of building docs for new version ${{ inputs.release_tag }}"
-      secrets: inherit
+      # secrets: inherit
