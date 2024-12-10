@@ -57,6 +57,7 @@ jobs:
     - name: Check if major or minor version changed
       id: compare
       run: |
+        git fetch --tags
         previous=$(git describe --tags --abbrev=0 ${{ inputs.release_tag }}^)
         previous=$(cut -d '.' -f 1-2 <<< $previous) # remove patch number
         previous=${previous#v}                      # remove optional "v" prefix
