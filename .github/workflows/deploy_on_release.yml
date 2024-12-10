@@ -4,6 +4,10 @@ on:
   release:
     types: [created]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        required: false
+        type: string
 
 
 jobs:
@@ -52,16 +56,18 @@ jobs:
     - name: Check if major or minor version changed
       id: compare
       run: |
-        previous=$(git describe --tags --abbrev=0 ${{ github.event.release.tag_name }}^)
+        previous=$(git describe --tags --abbrev=0 ${{ inputs.release_tag }}^)
         previous=$(cut -d '.' -f 1-2 <<< $previous) # remove patch number
         previous=${previous#v}                      # remove optional "v" prefix
-        next="${$(cut -d '.' -f 1-2 <<< ${{ github.event.release.tag_name }})#v}"
+        next="${$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})#v}"
 
         major_minor_changed=$( [[ "$previous" == "$next" ]] && echo "false" || echo "true" )
         echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
     - name: Version and Publish website
       if: ${{ steps.compare.outputs.major_minor_changed }}
-      uses: ./.github/workflows/publish_website.yml
-      with:
-        new_version: ${{ github.event.release.tag_name }}
+      # uses: ./.github/workflows/publish_website.yml
+      # with:
+      #   new_version: ${{ inputs.release_tag }}
+      run: |
+        echo "example of building docs for new version ${{ inputs.release_tag }}"
       secrets: inherit
