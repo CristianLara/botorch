@@ -58,7 +58,7 @@ jobs:
       id: compare
       run: |
         git fetch --tags
-        previous=$(git describe --tags --abbrev=0 ${{ inputs.release_tag }}^)
+        previous=v0.12.0
         previous=$(cut -d '.' -f 1-2 <<< $previous) # remove patch number
         previous=${previous#v}                      # remove optional "v" prefix
         next=$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})
