@@ -67,10 +67,11 @@ jobs:
         major_minor_changed=$( [[ "$previous" == "$next" ]] && echo "false" || echo "true" )
         echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
     - name: Version and Publish website
-      if: ${{ steps.compare.outputs.major_minor_changed }}
+      if: steps.compare.outputs.major_minor_changed
       # uses: ./.github/workflows/publish_website.yml
       # with:
       #   new_version: ${{ inputs.release_tag }}
       run: |
+        echo ${{ steps.compare.outputs.major_minor_changed }}
         echo "example of building docs for new version ${{ inputs.release_tag }}"
       # secrets: inherit
