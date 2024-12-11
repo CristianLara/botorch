@@ -61,9 +61,12 @@ jobs:
         previous=$(git describe --tags --abbrev=0 ${{ inputs.release_tag }}^)
         previous=$(cut -d '.' -f 1-2 <<< $previous) # remove patch number
         previous=${previous#v}                      # remove optional "v" prefix
+        echo $previous
         next=$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})
         next=${next#v}
+        echo $next
         next=${$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})#v}
+        echo $next
 
         major_minor_changed=$( [[ "$previous" == "$next" ]] && echo "false" || echo "true" )
         echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
