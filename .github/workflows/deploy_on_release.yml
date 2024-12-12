@@ -67,8 +67,7 @@ jobs:
         echo "Updating from version $previous to $next"
         if [[ "$previous" == "$next" ]]; then
           # echo "Major/Minor version was not changed. Skipping doc generation step."
-          echo "::notice::Major/Minor version was not changed. Skipping doc generation step."
-          echo "::warning::Major/Minor version was not changed. Skipping doc generation step."
+          echo "::warning title=Notice::Major/Minor version was not changed. Skipping doc generation step."
         else
           echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
         fi
