@@ -64,8 +64,11 @@ jobs:
         next=$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})
         next=${next#v}
 
-        major_minor_changed=$( [[ "$previous" == "$next" ]] && echo "false" || echo "true" )
-        echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
+        if [[ "$previous" == "$next" ]]; then
+          echo "Major/Minor version was not changed. Skipping doc generation step."
+        else
+          echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
+        fi
     - name: Version and Publish website
       if: ${{ steps.compare.outputs.major_minor_changed == 'true' }}
       # uses: ./.github/workflows/publish_website.yml
