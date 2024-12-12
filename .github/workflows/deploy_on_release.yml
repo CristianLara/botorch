@@ -64,10 +64,9 @@ jobs:
         next=$(cut -d '.' -f 1-2 <<< ${{ inputs.release_tag }})
         next=${next#v}
 
-        echo "Updating from version $previous to $next"
+        echo "Updating from version v0.12.0 to ${{ inputs.release_tag }}"
         if [[ "$previous" == "$next" ]]; then
-          # echo "Major/Minor version was not changed. Skipping doc generation step."
-          echo "::warning title=Notice::Major/Minor version was not changed. Skipping doc generation step."
+          echo "::warning::Major/Minor version was not changed. Skipping website & docs generation step."
         else
           echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
         fi
