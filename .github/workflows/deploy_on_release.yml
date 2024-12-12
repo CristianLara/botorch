@@ -68,7 +68,7 @@ jobs:
         if [[ "$previous" == "$next" ]]; then
           echo "::warning::Major/Minor version was not changed. Skipping website & docs generation step."
         else
-          echo major_minor_changed=$major_minor_changed >> $GITHUB_OUTPUT
+          echo major_minor_changed=true >> $GITHUB_OUTPUT
         fi
     - name: Version and Publish website
       if: ${{ steps.compare.outputs.major_minor_changed == 'true' }}
