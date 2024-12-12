@@ -74,6 +74,7 @@ jobs:
       # with:
       #   new_version: ${{ inputs.release_tag }}
       run: |
+        echo ${{ steps.compare.outcome }}
         echo ${{ steps.compare.conclusion }}
         echo "example of building docs for new version ${{ inputs.release_tag }}"
       # secrets: inherit
