@@ -9,4 +9,7 @@ on:
 jobs:
   publish-latest-website:
     name: Publish latest website
+    permissions:
+      pages: write
+      id-token: write
     uses: ./.github/workflows/publish_website.yml
