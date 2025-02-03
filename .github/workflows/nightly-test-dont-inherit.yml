@@ -1,0 +1,11 @@
+name: Nightly Cron test don't inherit secrets
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  publish-latest-website:
+    name: Publish latest website
+    needs: [tests-and-coverage-nightly, package-test-deploy-pypi]
+    uses: ./.github/workflows/publish_website.yml
