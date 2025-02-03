@@ -87,3 +87,4 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      contents: write

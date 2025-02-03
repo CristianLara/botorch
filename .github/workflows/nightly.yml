@@ -72,6 +72,7 @@ jobs:
     permissions:
       pages: write
       id-token: write
+      contents: write
 
   run_tutorials:
     name: Run tutorials without smoke test on latest PyTorch / GPyTorch / Ax
