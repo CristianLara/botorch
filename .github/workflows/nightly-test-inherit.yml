@@ -9,6 +9,5 @@ on:
 jobs:
   publish-latest-website:
     name: Publish latest website
-    needs: [tests-and-coverage-nightly, package-test-deploy-pypi]
     uses: ./.github/workflows/publish_website.yml
     secrets: inherit
