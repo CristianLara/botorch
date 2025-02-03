@@ -88,3 +88,4 @@ jobs:
       pages: write
       id-token: write
       contents: write
+      deployment: write
